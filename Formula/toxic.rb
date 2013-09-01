@@ -8,7 +8,6 @@ class Toxic < Formula
   depends_on "libtoxcore"
   depends_on "autoconf"
   depends_on "automake"
-  depends_on "libtoxcore"
   
   def install
     system "autoreconf", "-i"
