@@ -1,4 +1,4 @@
-Homebrew forumlae to install Tox.  
+Homebrew forumla to install Tox.  
 
 **Tap it**:
 
