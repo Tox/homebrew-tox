@@ -14,7 +14,7 @@ class Libtoxcore < Formula
 
   def install
     system "autoreconf", "-i"
-    system "./configure", "--prefix=#{prefix}"
+    system "./configure", "--prefix=#{prefix}", "--disable-ntox"
     system "make"
     system "make", "install"
   end
