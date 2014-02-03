@@ -10,7 +10,7 @@ Homebrew formulae to install Tox.
 
 **Install toxic**:
 
-    brew install --HEAD toxic
+    brew install --HEAD toxic
 
 **Install venom**:
 
