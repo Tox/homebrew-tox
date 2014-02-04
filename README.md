@@ -14,10 +14,10 @@ Homebrew formulae to install Tox.
 
 **Install venom**:
 
-    brew  install --HEAD venom
+    brew install --HEAD venom
 
 **Install Poison**:
 
-    brew  install poison
+    brew install poison
     # OR...
-    brew  install --HEAD poison # unreliable and dangerous!
+    brew install --HEAD poison # unreliable and dangerous!
