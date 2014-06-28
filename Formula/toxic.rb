@@ -10,14 +10,14 @@ class Toxic < Formula
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   
-  option "with-audio", "Build toxic with audio call support"
+  option "without-audio", "Build toxic without audio call support"
   
   def install
     Dir.chdir("build")
     cflags = ["-DPACKAGE_DATADIR=\\\"/usr/local/Cellar/toxic/HEAD/share/toxic/\\\""]
     ldflags = ["-L/usr/local/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv"]
     
-    if build.with? "audio"
+    unless build.without? "audio"
       cflags.push "-framework OpenAL"
       ldflags.push "-ltoxav"
     end
