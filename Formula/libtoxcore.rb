@@ -2,19 +2,39 @@ require 'formula'
 
 class Libtoxcore < Formula
   head "git://github.com/irungentoo/ProjectTox-Core", :using => :git
-  homepage "http://tox.im"
+  homepage "https://tox.im"
 
   depends_on "libsodium"
-  depends_on "autoconf"
-  depends_on "automake"
-  depends_on "libconfig"
-  depends_on "libtool"
-  depends_on "check"
-  depends_on "pkg-config"
+  
+  # Following dependencies are only required in build
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
+  depends_on "check" => :build
+  depends_on "pkg-config" => :build
+
+  depends_on "libconfig" if build.with? "daemon"
+  
+  depends_on "opus" unless build.include? "without-av"
+  depends_on "libvpx" unless build.include? "without-av"
+
+  option "without-av", "Compile with A/V support"
+  option "with-daemon", "Builds the bootstrap server daemon"
 
   def install
-    system "autoreconf", "-i"
-    system "./configure", "--prefix=#{prefix}", "--disable-ntox"
+    ENV["PKG_CONFIG_PATH"] = "/usr/local/lib/pkgconfig"
+    
+    args = []
+    if build.include? "without-av"
+      args.push "--disable-av"
+    end
+    
+    if build.with? "daemon"
+      args.push "--enable-daemon"
+    end
+    
+    system "autoreconf", "-if"
+    system "./configure", "--prefix=#{prefix}", *args
     system "make"
     system "make", "install"
   end
