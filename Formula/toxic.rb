@@ -2,7 +2,7 @@ require 'formula'
 
 class Toxic < Formula
   head "git://github.com/Tox/toxic", :using => :git
-  homepage "http://tox.im"
+  homepage "https://tox.im"
 
   depends_on "libsodium"
   depends_on "libtoxcore"
@@ -10,9 +10,8 @@ class Toxic < Formula
   depends_on "automake"
   
   def install
-    system "autoreconf", "-i"
-    system "./configure", "--prefix=#{prefix}"
-    system "make"
-    system "make install"
+    system "cd build"
+    system "make", "PREFIX='#{prefix}'"
+    system "make install", "PREFIX='#{prefix}'"
   end
 end
