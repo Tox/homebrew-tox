@@ -5,23 +5,23 @@ class Toxic < Formula
   homepage "https://tox.im"
 
   depends_on "libtoxcore"
-  depends_on "ncurses"
-  
+  depends_on "homebrew/dupes/ncurses"
+
   depends_on "autoconf" => :build
   depends_on "automake" => :build
-  
+
   option "without-audio", "Build toxic without audio call support"
-  
+
   def install
     Dir.chdir("build")
-    cflags = ["-DPACKAGE_DATADIR=\\\"/usr/local/Cellar/toxic/HEAD/share/toxic/\\\""]
-    ldflags = ["-L/usr/local/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv"]
-    
+    cflags = ["-DPACKAGE_DATADIR=\\\"/usr/local/Cellar/toxic/HEAD/share/toxic/\\\"", "-I/usr/local/opt/ncurses/include"]
+    ldflags = ["-L/usr/local/lib", "-L/usr/local/opt/ncurses/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv"]
+
     unless build.without? "audio"
       cflags.push "-framework OpenAL"
       ldflags.push "-ltoxav"
     end
-    
+
     ENV["USER_CFLAGS"] = cflags.join " "
     ENV["USER_LDFLAGS"] = ldflags.join " "
 
