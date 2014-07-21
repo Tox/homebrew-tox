@@ -12,12 +12,12 @@ Homebrew formulae to install Tox.
 
     brew install --HEAD toxic
 
-**Install venom**:
+*Supported flags in libtoxcore*:
 
-    brew install --HEAD venom
+- `--without-av`
+- `--with-daemon` (builds the DHT bootstrap daemon)
 
-**Install Poison**:
+*Supported flags in toxic*:
 
-    brew install poison
-    # OR...
-    brew install --HEAD poison # unreliable and dangerous!
+- `--without-audio` (you must specify this if libtoxcore was installed with `--without-av`)
+
