@@ -13,8 +13,8 @@ class Toxic < Formula
 
   def install
     Dir.chdir("build")
-    cflags = ["-DPACKAGE_DATADIR=\\\"/usr/local/Cellar/toxic/HEAD/share/toxic/\\\"", "-I/usr/local/opt/ncurses/include", "-I/usr/local/include"]
-    ldflags = ["-L/usr/local/lib", "-L/usr/local/opt/ncurses/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv", "-lalut", "-lconfig"]
+    cflags = ["-DPACKAGE_DATADIR=\\\"/usr/local/Cellar/toxic/HEAD/share/toxic/\\\"", "-I/usr/local/opt/ncurses/include", "-I/usr/local/include", "-g"]
+    ldflags = ["-L/usr/local/lib", "-L/usr/local/opt/ncurses/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv", "-lalut", "-lconfig", "-g"]
 
     unless build.without? "audio"
       cflags.push "-framework OpenAL"
@@ -26,6 +26,13 @@ class Toxic < Formula
 
     system "make", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES"
     system "make", "install", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES"
+  end
+
+  def caveats
+    <<-EOF.undent
+    toxic is a command-line application. For a GUI, try uTox:
+      brew install --HEAD utox
+    EOF
   end
 
   patch :DATA
