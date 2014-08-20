@@ -39,11 +39,13 @@ class Toxic < Formula
 end
 
 __END__
-diff --git a/cfg/check_features.mk b/cfg/check_features.mk
+diff --git a/cfg/checks/check_features.mk b/cfg/checks/check_features.mk
 index 56d2210..a6b357d 100644
---- a/cfg/check_features.mk
-+++ b/cfg/check_features.mk
-@@ -1,10 +1,3 @@
+--- a/cfg/checks/check_features.mk
++++ b/cfg/checks/check_features.mk
+@@ -1,12 +1,5 @@
+CHECKS_DIR = $(CFG_DIR)/checks
+
 -# Check if we can use X11
 -CHECK_X11_LIBS = $(shell pkg-config x11 || echo -n "error")
 -ifneq ($(CHECK_X11_LIBS), error)
