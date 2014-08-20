@@ -1,4 +1,12 @@
-homebrew-qtox
+Homebrew formulae to install qTox.
 =============
 
-Easy qTox easily with homebrew
+**Tap it**:
+
+    brew tap ReDetection/qtox
+
+**Install core**:
+
+    brew install --HEAD qtox
+
+Note that qTox requires qt5 which can take a very long time to compile
