@@ -4,7 +4,7 @@ class Qtox < Formula
   homepage "https://github.com/tux3/qTox"
   head "git://github.com/tux3/qTox", :using => :git
   
-  depends_on "libtoxcore"
+  depends_on "Tox/tox/libtoxcore"
   depends_on "qt5"
 
   def install
