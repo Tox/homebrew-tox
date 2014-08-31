@@ -47,7 +47,7 @@ index 56d2210..a6b357d 100644
  CHECKS_DIR = $(CFG_DIR)/checks
 
 -# Check if we can use X11
--CHECK_X11_LIBS = $(shell pkg-config x11 || echo -n "error")
+-CHECK_X11_LIBS = $(shell pkg-config --exists x11 || echo -n "error")
 -ifneq ($(CHECK_X11_LIBS), error)
 -	LIBS += x11
 -	CFLAGS += -D_X11
