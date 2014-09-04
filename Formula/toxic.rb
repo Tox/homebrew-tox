@@ -24,8 +24,8 @@ class Toxic < Formula
     ENV["USER_CFLAGS"] = cflags.join " "
     ENV["USER_LDFLAGS"] = ldflags.join " "
 
-    system "make", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES"
-    system "make", "install", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES"
+    system "make", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES", "DISABLE_X11=YES"
+    system "make", "install", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES", "DISABLE_X11=YES"
   end
 
   def caveats
@@ -34,26 +34,4 @@ class Toxic < Formula
       brew install --HEAD utox
     EOF
   end
-
-  patch :DATA
 end
-
-__END__
-diff --git a/cfg/checks/check_features.mk b/cfg/checks/check_features.mk
-index 56d2210..a6b357d 100644
---- a/cfg/checks/check_features.mk
-+++ b/cfg/checks/check_features.mk
-@@ -1,12 +1,5 @@
- CHECKS_DIR = $(CFG_DIR)/checks
-
--# Check if we can use X11
--CHECK_X11_LIBS = $(shell pkg-config --exists x11 || echo -n "error")
--ifneq ($(CHECK_X11_LIBS), error)
--	LIBS += x11
--	CFLAGS += -D_X11
--endif
--
- # Check if we want build audio support
- AUDIO = $(shell if [ -z "$(DISABLE_AV)" ] || [ "$(DISABLE_AV)" = "0" ] ; then echo enabled ; else echo disabled ; fi)
- ifneq ($(AUDIO), disabled)
-
