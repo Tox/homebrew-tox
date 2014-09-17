@@ -14,7 +14,7 @@ class Toxic < Formula
   def install
     Dir.chdir("build")
     cflags = ["-DPACKAGE_DATADIR=\\\"/usr/local/Cellar/toxic/HEAD/share/toxic/\\\"", "-I/usr/local/opt/ncurses/include", "-I/usr/local/include", "-g"]
-    ldflags = ["-L/usr/local/lib", "-L/usr/local/opt/ncurses/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv", "-lalut", "-lconfig", "-g"]
+    ldflags = ["-L/usr/local/lib", "-L/usr/local/opt/ncurses/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv", "-lalut", "-lconfig", "-ltoxencryptsave", "-g"]
 
     unless build.without? "audio"
       cflags.push "-framework OpenAL"
