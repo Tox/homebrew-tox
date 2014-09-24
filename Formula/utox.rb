@@ -6,11 +6,12 @@ class Utox < Formula
 
   depends_on "libtoxcore"
   depends_on "freealut"
+  depends_on :x11
 
   def install
-    includes = ["-I/usr/local/include", "-I/usr/X11/include",
-                "-I/usr/X11/include/freetype2"]
-    libdirs  = ["-L/usr/local/lib", "-L/usr/X11/lib"]
+    includes = ["-I/usr/local/include", "-I/opt/X11/include",
+                "-I/opt/X11/include/freetype2"]
+    libdirs  = ["-L/usr/local/lib", "-L/opt/X11/lib"]
     libs = ["-ltoxcore", "-ltoxav", "-ltoxdns", "-lresolv",
             "-framework", "OpenAL", "-lX11", "-lXext", "-lXrender",
             "-lXft", "-lfontconfig", "-lfreetype", "-lvpx"]
