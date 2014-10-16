@@ -18,6 +18,7 @@ class Libtoxcore < Formula
   depends_on "opus" unless build.include? "without-av"
   depends_on "libvpx" unless build.include? "without-av"
 
+  option "with-testing", "Compile contents of testing/ folder (usually broken)"
   option "without-av", "Compile with A/V support"
   option "with-daemon", "Builds the bootstrap server daemon"
 
@@ -31,6 +32,10 @@ class Libtoxcore < Formula
 
     if build.with? "daemon"
       args.push "--enable-daemon"
+    end
+
+    if !build.with? "testing"
+      args.push "--disable-testing"
     end
 
     system "autoreconf", "-if"
