@@ -24,17 +24,9 @@ class Libtoxcore < Formula
 
   def install
     args = []
-    if build.include? "without-av"
-      args.push "--disable-av"
-    end
-
-    if build.with? "daemon"
-      args.push "--enable-daemon"
-    end
-
-    if !build.with? "testing"
-      args.push "--disable-testing"
-    end
+    args << "--disable-av" if build.include? "without-av"
+    args << "--enable-daemon" if build.with? "daemon"
+    args << "--disable-testing" if !build.with? "testing"
 
     system "autoreconf", "-if"
     system "./configure", "--prefix=#{prefix}", *args
