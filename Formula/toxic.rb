@@ -12,17 +12,20 @@ class Toxic < Formula
   option "without-audio", "Build toxic without audio call support"
 
   def install
-    Dir.chdir("build")
-    cflags = ["-DPACKAGE_DATADIR=\\\"/usr/local/Cellar/toxic/HEAD/share/toxic/\\\"", "-I/usr/local/opt/ncurses/include", "-I/usr/local/include", "-g"]
-    ldflags = ["-L/usr/local/lib", "-L/usr/local/opt/ncurses/lib", "-lncursesw", "-ltoxcore", "-ltoxdns", "-lresolv", "-lalut", "-lconfig", "-ltoxencryptsave", "-g"]
+    cd "build"
 
-    unless build.without? "audio"
-      cflags.push "-framework OpenAL"
-      ldflags.push "-ltoxav"
+    ENV.append "CFLAGS", "-DPACKAGE_DATADIR=\\\"#{prefix}/share/toxic\\\""
+    ENV.append "CFLAGS", "-g"
+    ENV.append "LDFLAGS", "-lncursesw -ltoxcore -ltoxdns -lresolv -lalut"
+    ENV.append "LDFLAGS", "-lconfig -ltoxencryptsave -g"
+
+    if build.with? "audio"
+      ENV.append "CFLAGS", "-framework OpenAL"
+      ENV.append "LDFLAGS", "-ltoxav"
     end
 
-    ENV["USER_CFLAGS"] = cflags.join " "
-    ENV["USER_LDFLAGS"] = ldflags.join " "
+    ENV["USER_CFLAGS"] = ENV["CFLAGS"]
+    ENV["USER_LDFLAGS"] = ENV["LDFLAGS"]
 
     system "make", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES", "DISABLE_X11=YES"
     system "make", "install", "PREFIX='#{prefix}'", "DISABLE_DESKTOP_NOTIFY=YES", "DISABLE_X11=YES"
