@@ -23,8 +23,6 @@ class Libtoxcore < Formula
   option "with-daemon", "Builds the bootstrap server daemon"
 
   def install
-    ENV["PKG_CONFIG_PATH"] = "/usr/local/lib/pkgconfig"
-
     args = []
     if build.include? "without-av"
       args.push "--disable-av"
