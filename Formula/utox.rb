@@ -9,15 +9,17 @@ class Utox < Formula
   depends_on :x11
 
   def install
-    includes = ["-I/usr/local/include", "-I/opt/X11/include",
-                "-I/opt/X11/include/freetype2"]
-    libdirs  = ["-L/usr/local/lib", "-L/opt/X11/lib"]
-    libs = ["-ltoxcore", "-ltoxav", "-ltoxdns", "-lresolv",
-            "-framework", "OpenAL", "-lX11", "-lXext", "-lXrender",
-            "-lXft", "-lfontconfig", "-lfreetype", "-lvpx"]
     Dir.mkdir("#{prefix}/bin", 0775)
-    system("cc", "-o", "#{prefix}/bin/utox", *includes, *libdirs, *libs,
-           *Dir.glob("*.c"), "png/png.c")
+
+    libs = %w[-ltoxcore -ltoxav -ltoxdns -lresolv
+              -framework OpenAL -lX11 -lXext -lXrender
+              -lXft -lfontconfig -lfreetype -lvpx]
+
+    cflags = ENV.cflags || ""
+    ldflags = ENV.ldflags || ""
+    args = cflags.split(" ") + ldflags.split(" ") + libs + Dir["*.c"] + ["png/png.c"]
+
+    system ENV.cc, "-o", "#{prefix}/bin/utox", *args
   end
 
 end
