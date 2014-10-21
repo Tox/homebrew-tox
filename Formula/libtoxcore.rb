@@ -19,7 +19,7 @@ class Libtoxcore < Formula
   depends_on "libvpx" unless build.include? "without-av"
 
   option "with-testing", "Compile contents of testing/ folder (usually broken)"
-  option "without-av", "Compile with A/V support"
+  option "without-av", "Compile without A/V support"
   option "with-daemon", "Builds the bootstrap server daemon"
 
   def install
