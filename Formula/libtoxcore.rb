@@ -19,24 +19,14 @@ class Libtoxcore < Formula
   depends_on "libvpx" unless build.include? "without-av"
 
   option "with-testing", "Compile contents of testing/ folder (usually broken)"
-  option "without-av", "Compile with A/V support"
+  option "without-av", "Compile without A/V support"
   option "with-daemon", "Builds the bootstrap server daemon"
 
   def install
-    ENV["PKG_CONFIG_PATH"] = "/usr/local/lib/pkgconfig"
-
     args = []
-    if build.include? "without-av"
-      args.push "--disable-av"
-    end
-
-    if build.with? "daemon"
-      args.push "--enable-daemon"
-    end
-
-    if !build.with? "testing"
-      args.push "--disable-testing"
-    end
+    args << "--disable-av" if build.include? "without-av"
+    args << "--enable-daemon" if build.with? "daemon"
+    args << "--disable-testing" if !build.with? "testing"
 
     system "autoreconf", "-if"
     system "./configure", "--prefix=#{prefix}", *args
