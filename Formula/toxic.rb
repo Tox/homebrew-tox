@@ -8,6 +8,7 @@ class Toxic < Formula
   depends_on "homebrew/dupes/ncurses"
   depends_on "freealut"
   depends_on "libconfig"
+  depends_on "pkg-config" => :build
 
   option "without-audio", "Build toxic without audio call support"
 
