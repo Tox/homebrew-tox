@@ -8,6 +8,7 @@ class Qtox < Formula
   depends_on "qt5"
   depends_on "homebrew/science/opencv"
   depends_on "Tox/tox/libfilteraudio"
+  depends_on "qrencode"
 
   def install
     mkdir "libs"
