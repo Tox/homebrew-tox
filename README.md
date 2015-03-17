@@ -21,3 +21,5 @@ Homebrew formulae to install Tox.
 
 - `--without-audio` (you must specify this if libtoxcore was installed with `--without-av`)
 
+**Note**:
+The formulae to install libfilteraudio and qTox were written by [ReDetection](https://github.com/ReDetection) in [ReDetection/homebrew-qtox.](https://github.com/ReDetection/homebrew-qtox)
