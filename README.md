@@ -21,3 +21,11 @@ Homebrew formulae to install Tox.
 
 - `--without-audio` (you must specify this if libtoxcore was installed with `--without-av`)
 
+**Install qTox**:
+
+    brew install --HEAD qtox
+
+Note that qTox requires qt5 which can take a very long time to compile. You might want to install it from bottle:
+
+    brew install qt5
+    brew install --HEAD qtox
