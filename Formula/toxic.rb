@@ -13,8 +13,6 @@ class Toxic < Formula
   option "without-audio", "Build toxic without audio call support"
 
   def install
-    cd "build"
-
     ENV.append "CFLAGS", "-DPACKAGE_DATADIR=\\\"#{prefix}/share/toxic\\\""
     ENV.append "CFLAGS", "-g"
     ENV.append "LDFLAGS", "-lncursesw -ltoxcore -ltoxdns -lresolv -lalut"
