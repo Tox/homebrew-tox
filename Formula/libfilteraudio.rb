@@ -3,7 +3,7 @@ class Libfilteraudio < Formula
   url "https://github.com/irungentoo/filter_audio.git"
 
   def install
-    system "make", "install"
+    system "make", "install", "PREFIX=#{prefix}"
   end
 
 end
