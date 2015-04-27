@@ -28,6 +28,8 @@ class Libtoxcore < Formula
     args << "--enable-daemon" if build.with? "daemon"
     args << "--disable-testing" if !build.with? "testing"
 
+    ENV["LDFLAGS"] = "-mmacosx-version-min=10.6"
+    ENV["CFLAGS"] = "-mmacosx-version-min=10.6"
     system "autoreconf", "-if"
     system "./configure", "--prefix=#{prefix}", *args
     system "make"
