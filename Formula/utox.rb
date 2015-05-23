@@ -5,21 +5,11 @@ class Utox < Formula
   homepage "https://tox.im"
 
   depends_on "libtoxcore"
-  depends_on "freealut"
-  depends_on :x11
+  depends_on "pkg-config" => :build
+  depends_on "libfilteraudio"
 
   def install
-    Dir.mkdir("#{prefix}/bin", 0775)
-
-    libs = %w[-ltoxcore -ltoxav -ltoxdns -lresolv
-              -framework OpenAL -lX11 -lXext -lXrender
-              -lXft -lfontconfig -lfreetype -lvpx]
-
-    cflags = ENV.cflags || ""
-    ldflags = ENV.ldflags || ""
-    args = cflags.split(" ") + ldflags.split(" ") + libs + Dir["*.c"] + ["png/png.c"]
-
-    system ENV.cc, "-o", "#{prefix}/bin/utox", *args
+    system "make", "-f", "cocoa/Makefile", "uTox.app"
+    prefix.install "uTox.app"
   end
-
 end
