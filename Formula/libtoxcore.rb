@@ -2,7 +2,7 @@ require 'formula'
 
 class Libtoxcore < Formula
   head "git://github.com/irungentoo/toxcore", :using => :git
-  homepage "https://tox.im"
+  homepage "https://tox.chat"
 
   depends_on "libsodium"
 

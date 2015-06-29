@@ -2,7 +2,7 @@ require 'formula'
 
 class Utox < Formula
   head "git://github.com/notsecure/uTox", :using => :git
-  homepage "https://tox.im"
+  homepage "https://tox.chat"
 
   depends_on "libtoxcore"
   depends_on "pkg-config" => :build

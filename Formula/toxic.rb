@@ -2,7 +2,7 @@ require 'formula'
 
 class Toxic < Formula
   head "git://github.com/Tox/toxic", :using => :git
-  homepage "https://tox.im"
+  homepage "https://tox.chat"
 
   depends_on "libtoxcore"
   depends_on "homebrew/dupes/ncurses"
