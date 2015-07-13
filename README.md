@@ -29,12 +29,3 @@ Note that qTox requires qt5 which can take a very long time to compile. You migh
 
     brew install qt5
     brew install --HEAD qtox
-
-When installing qTox, it may try to install gcc, which is not actually required. Workaround:
-
-    brew install --without-brewed-numpy homebrew/science/opencv
-    brew edit qtox
-
-Comment out the line starting with `depends_on "homebrew/science/opencv"`. Save, then
-
-    brew install --HEAD qtox
