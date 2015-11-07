@@ -1,7 +1,7 @@
 require 'formula'
 
 class Utox < Formula
-  head "git://github.com/notsecure/uTox", :using => :git
+  head "git://github.com/GrayHatter/uTox", :using => :git
   homepage "https://tox.chat"
 
   depends_on "libtoxcore"
