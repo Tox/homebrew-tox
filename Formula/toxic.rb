@@ -8,20 +8,30 @@ class Toxic < Formula
   depends_on "homebrew/dupes/ncurses"
   depends_on "freealut"
   depends_on "libconfig"
+  depends_on "qrencode"
   depends_on "pkg-config" => :build
 
-  option "without-audio", "Build toxic without audio call support"
+  def hacks
+    # openal-soft doesn't seem to work so we will use apple's openal
+    pc = <<-EOF.undent
+    Name: openal
+    Description: This is a dummy file to help toxic find Apple's OpenAL framework.
+    Version: 0.0.0
+    Libs: -framework OpenAL
+    Cflags: -framework OpenAL
+    EOF
+
+    Dir.mkdir(File.join(Dir.pwd, "_hacks"))
+    File.write(File.join(Dir.pwd, "_hacks", "openal.pc"), pc)
+  end
 
   def install
-    ENV.append "CFLAGS", "-DPACKAGE_DATADIR=\\\"#{prefix}/share/toxic\\\""
-    ENV.append "CFLAGS", "-g"
-    ENV.append "LDFLAGS", "-lncursesw -ltoxcore -ltoxdns -lresolv -lalut"
-    ENV.append "LDFLAGS", "-lconfig -ltoxencryptsave -g"
+    hacks
 
-    if build.with? "audio"
-      ENV.append "CFLAGS", "-framework OpenAL"
-      ENV.append "LDFLAGS", "-ltoxav"
-    end
+    orig_pkg_config_path = ENV["PKG_CONFIG_PATH"]
+    ENV["PKG_CONFIG_PATH"] = "#{Dir.pwd}/_hacks:#{orig_pkg_config_path}"
+
+    ENV.append "CFLAGS", "-DPACKAGE_DATADIR=\\\"#{prefix}/share/toxic\\\""
 
     ENV["USER_CFLAGS"] = ENV["CFLAGS"]
     ENV["USER_LDFLAGS"] = ENV["LDFLAGS"]
