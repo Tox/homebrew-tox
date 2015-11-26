@@ -4,7 +4,7 @@ Homebrew formulae to install Tox.
 
     brew tap Tox/tox
 
-**Install core**:
+**Install [core](https://github.com/irungentoo/toxcore)**:
 
     brew install --HEAD libtoxcore
 
@@ -13,15 +13,15 @@ Homebrew formulae to install Tox.
 - `--without-av`
 - `--with-daemon` (builds the DHT bootstrap daemon)
 
-**Install toxic**:
+**Install [toxic](https://github.com/JFreegman/toxic)**:
 
     brew install --HEAD toxic
 
-*Supported flags in toxic*:
+**Install [uTox](https://github.com/grayhatter/uTox)**:
 
-- `--without-audio` (you must specify this if libtoxcore was installed with `--without-av`)
+    brew install --HEAD utox
 
-**Install qTox**:
+**Install [qTox](https://github.com/tux3/qTox)**:
 
     brew install --HEAD qtox
 
