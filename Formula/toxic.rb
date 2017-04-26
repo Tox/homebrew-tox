@@ -5,7 +5,7 @@ class Toxic < Formula
   homepage "https://tox.chat"
 
   depends_on "libtoxcore"
-  depends_on "homebrew/dupes/ncurses"
+  depends_on "ncurses"
   depends_on "freealut"
   depends_on "libconfig"
   depends_on "qrencode"
