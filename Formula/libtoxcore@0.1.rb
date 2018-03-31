@@ -1,5 +1,5 @@
 class LibtoxcoreAT01 < Formula
-  desc "Library of the Tox protocol written in C"
+  desc "Tox library written in C"
   homepage "https://tox.chat"
   head "git://github.com/TokTok/c-toxcore", branch: "0.1.x"
 
