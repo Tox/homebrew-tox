@@ -1,47 +1,55 @@
-require 'formula'
-
 class Libtoxcore < Formula
-  head "git://github.com/TokTok/c-toxcore", :using => :git
+  desc "Library of the Tox protocol written in C"
   homepage "https://tox.chat"
+  head "git://github.com/TokTok/c-toxcore"
+
+  option "without-av", "Compile without A/V support"
+  option "with-daemon", "Builds the bootstrap server daemon"
+  option "without-shared", "Build shared (dynamic) libraries for all modules"
 
   depends_on "libsodium"
 
   # Following dependencies are only required in build
-  depends_on "autoconf" => :build
-  depends_on "automake" => :build
-  depends_on "libtool" => :build
-  depends_on "check" => :build
+  depends_on "cmake" => :build
   depends_on "pkg-config" => :build
 
-  depends_on "libconfig" if build.with? "daemon"
+  if build.with? "daemon"
+    depends_on "libconfig"
+  end
 
-  depends_on "opus" unless build.include? "without-av"
-  depends_on "libvpx" unless build.include? "without-av"
-
-  option "with-testing", "Compile contents of testing/ folder (usually broken)"
-  option "without-av", "Compile without A/V support"
-  option "with-daemon", "Builds the bootstrap server daemon"
+  unless build.without? "av"
+    depends_on "libconfig"
+    depends_on "opus"
+    depends_on "libvpx"
+  end
 
   def install
     args = []
-    args << "--disable-av" if build.include? "without-av"
-    args << "--enable-daemon" if build.with? "daemon"
-    args << "--disable-testing" if !build.with? "testing"
+    unless build.with? "daemon"
+      args << "-DDHT_BOOTSTRAP=OFF"
+    end
+    if build.without? "av"
+      args << "-DBUILD_TOXAV=OFF"
+    end
+    if build.without? "shared"
+      args << "-DENABLE_SHARED=OFF"
+    end
 
     ENV["LDFLAGS"] = "-mmacosx-version-min=10.6"
     ENV["CFLAGS"] = "-mmacosx-version-min=10.6"
-    system "autoreconf", "-if"
-    system "./configure", "--prefix=#{prefix}", *args
+    system "cmake", ".", *args, *std_cmake_args
     system "make"
     system "make", "install"
   end
 
   def caveats
-    <<-EOF.undent
-    libtoxcore has no UI. If you want to make use of it, try Toxic for a CLI:
-      brew install --HEAD toxic
-    or uTox for a GUI (X11):
-      brew install --HEAD utox
+    <<~EOF
+      libtoxcore has no UI. If you want to make use of it, try Toxic for a CLI:
+        brew install --HEAD toxic
+      or uTox for a GUI (X11):
+        brew install --HEAD utox
+      or qTox for a GUI (Qt):
+        brew install --HEAD qtox
     EOF
   end
 end

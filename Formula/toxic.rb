@@ -1,24 +1,23 @@
-require 'formula'
-
 class Toxic < Formula
-  head "git://github.com/Tox/toxic", :using => :git
+  desc "An ncurses-based Tox client"
   homepage "https://tox.chat"
+  head "git://github.com/Tox/toxic"
 
-  depends_on "libtoxcore"
-  depends_on "ncurses"
+  depends_on "pkg-config" => :build
   depends_on "freealut"
   depends_on "libconfig"
+  depends_on "libtoxcore"
+  depends_on "ncurses"
   depends_on "qrencode"
-  depends_on "pkg-config" => :build
 
   def hacks
     # openal-soft doesn't seem to work so we will use apple's openal
-    pc = <<-EOF.undent
-    Name: openal
-    Description: This is a dummy file to help toxic find Apple's OpenAL framework.
-    Version: 0.0.0
-    Libs: -framework OpenAL
-    Cflags: -framework OpenAL
+    pc = <<~EOF
+      Name: openal
+      Description: This is a dummy file to help toxic find Apple's OpenAL framework.
+      Version: 0.0.0
+      Libs: -framework OpenAL
+      Cflags: -framework OpenAL
     EOF
 
     Dir.mkdir(File.join(Dir.pwd, "_hacks"))
@@ -41,9 +40,10 @@ class Toxic < Formula
   end
 
   def caveats
-    <<-EOF.undent
-    toxic is a command-line application. For a GUI, try uTox:
-      brew install --HEAD utox
+    <<~EOF
+      toxic is a command-line application. For a GUI, try uTox or qTox:
+        brew install --HEAD utox
+        brew install --HEAD qtox
     EOF
   end
 end

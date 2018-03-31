@@ -1,10 +1,10 @@
-Homebrew formulae to install Tox.  
+Homebrew formulae to install Tox.
 
 **Tap it**:
 
     brew tap Tox/tox
 
-**Install [core](https://github.com/irungentoo/toxcore)**:
+**Install [core](https://github.com/TokTok/c-toxcore)**:
 
     brew install --HEAD libtoxcore
 
@@ -17,15 +17,10 @@ Homebrew formulae to install Tox.
 
     brew install --HEAD toxic
 
-**Install [uTox](https://github.com/grayhatter/uTox)**:
+**Install [uTox](https://github.com/uTox/uTox)**:
 
     brew install --HEAD utox
 
-**Install [qTox](https://github.com/tux3/qTox)**:
+**Install [qTox](https://github.com/qTox/qTox)**:
 
-    brew install --HEAD qtox
-
-Note that qTox requires qt5 which can take a very long time to compile. You might want to install it from bottle:
-
-    brew install qt5
     brew install --HEAD qtox
