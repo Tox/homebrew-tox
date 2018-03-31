@@ -12,6 +12,8 @@ class Toxic < Formula
   depends_on "ncurses"
   depends_on "qrencode"
   depends_on "libpng"
+  depends_on "curl"
+  depends_on "openal-soft"
 
   if build.with? "notifications"
     depends_on "libnotify"
@@ -26,8 +28,8 @@ class Toxic < Formula
       args << "DISABLE_DESKTOP_NOTIFY=YES"
     end
 
-    osx_frameworks = "-framework Foundation -framework CoreFoundation -framework AVFoundation -framework QuartzCore -framework CoreMedia -framework OpenAL"
-    ENV["LDFLAGS"] = "-lncurses -lalut -ltoxcore -lcurl -lconfig -lqrencode -lpng -g -lobjc -lresolv #{osx_frameworks} #"
+    osx_frameworks = "-framework Foundation -framework CoreFoundation -framework AVFoundation -framework QuartzCore -framework CoreMedia"
+    ENV["LDFLAGS"] = "-lncurses -lalut -ltoxcore -lcurl -lconfig -lqrencode -lpng -lopenal -g -lobjc -lresolv #{osx_frameworks} #"
     ENV.append "CFLAGS", "-DPACKAGE_DATADIR=\\\"#{share}\\\""
 
     ENV["USER_CFLAGS"] = ENV["CFLAGS"]

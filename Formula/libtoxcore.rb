@@ -5,7 +5,7 @@ class Libtoxcore < Formula
 
   option "without-av", "Compile without A/V support"
   option "with-daemon", "Builds the bootstrap server daemon"
-  option "without-shared", "Build shared (dynamic) libraries for all modules"
+  option "without-shared", "Build without shared (dynamic) libraries for all modules"
 
   depends_on "libsodium"
 
