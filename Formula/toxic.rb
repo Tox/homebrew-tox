@@ -28,8 +28,6 @@ class Toxic < Formula
       args << "DISABLE_DESKTOP_NOTIFY=YES"
     end
 
-    osx_frameworks = "-framework Foundation -framework CoreFoundation -framework AVFoundation -framework QuartzCore -framework CoreMedia"
-    ENV["LDFLAGS"] = "-lncurses -lalut -ltoxcore -lcurl -lconfig -lqrencode -lpng -lopenal -g -lobjc -lresolv #{osx_frameworks} #"
     ENV.append "CFLAGS", "-DPACKAGE_DATADIR=\\\"#{share}\\\""
 
     ENV["USER_CFLAGS"] = ENV["CFLAGS"]
