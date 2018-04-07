@@ -14,6 +14,7 @@ class Toxic < Formula
   depends_on "libpng"
   depends_on "curl"
   depends_on "openal-soft"
+  depends_on "python" => :optional
 
   if build.with? "notifications"
     depends_on "libnotify"
@@ -26,6 +27,10 @@ class Toxic < Formula
 
     unless build.with? "notifications"
       args << "DISABLE_DESKTOP_NOTIFY=YES"
+    end
+
+    if build.with? "python"
+      args << "ENABLE_PYTHON=YES"
     end
 
     ENV.append "CFLAGS", "-DPACKAGE_DATADIR=\\\"#{share}\\\""
