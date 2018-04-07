@@ -1,7 +1,7 @@
 class LibtoxcoreAT01 < Formula
   desc "Tox library written in C"
   homepage "https://tox.chat"
-  head "git://github.com/TokTok/c-toxcore", branch: "0.1.x"
+  head "git://github.com/TokTok/c-toxcore", tag: "v0.1.11"
 
   option "without-av", "Compile without A/V support"
   option "with-daemon", "Builds the bootstrap server daemon"
