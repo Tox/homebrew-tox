@@ -1,6 +1,9 @@
 class Libtoxcore < Formula
   desc "Tox library written in C"
   homepage "https://tox.chat"
+  url "https://github.com/TokTok/c-toxcore.git",
+    :tag => "v0.2.4",
+    :revision => "a672b3c56e3f3d67c5de19d2053af5bde1ae3d9f"
   head "git://github.com/TokTok/c-toxcore"
 
   option "without-av", "Compile without A/V support"
@@ -35,8 +38,6 @@ class Libtoxcore < Formula
       args << "-DENABLE_SHARED=OFF"
     end
 
-    ENV["LDFLAGS"] = "-mmacosx-version-min=10.6"
-    ENV["CFLAGS"] = "-mmacosx-version-min=10.6"
     system "cmake", ".", *args, *std_cmake_args
     system "make"
     system "make", "install"
