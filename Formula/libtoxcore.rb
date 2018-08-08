@@ -10,15 +10,13 @@ class Libtoxcore < Formula
   option "with-daemon", "Builds the bootstrap server daemon"
   option "without-shared", "Build without shared (dynamic) libraries for all modules"
 
-  depends_on "libsodium"
-
-  # Following dependencies are only required in build
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
 
   if build.with? "daemon"
     depends_on "libconfig"
   end
+  depends_on "libsodium"
 
   unless build.without? "av"
     depends_on "libconfig"
@@ -41,6 +39,24 @@ class Libtoxcore < Formula
     system "cmake", ".", *args, *std_cmake_args
     system "make"
     system "make", "install"
+  end
+
+  test do
+    (testpath/"test.c").write <<~EOS
+      #include <assert.h>
+      #include <tox/tox.h>
+
+      int main()
+      {
+        TOX_ERR_NEW err_new;
+        Tox *tox = tox_new(NULL, &err_new);
+        assert(err_new == TOX_ERR_NEW_OK);
+        return 0;
+      }
+    EOS
+    system ENV.cc, "test.c", "-I#{include}", "-L#{lib}",
+                   "-ltoxcore", "-o", "test"
+    system "./test"
   end
 
   def caveats
