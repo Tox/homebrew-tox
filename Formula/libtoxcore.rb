@@ -2,8 +2,8 @@ class Libtoxcore < Formula
   desc "Tox library written in C"
   homepage "https://tox.chat"
   url "https://github.com/TokTok/c-toxcore.git",
-    :tag => "v0.2.4",
-    :revision => "a672b3c56e3f3d67c5de19d2053af5bde1ae3d9f"
+    :tag => "v0.2.12",
+    :revision => "9be4dbb4335bf7d893c8d00566d3276ab6dedd14"
   head "git://github.com/TokTok/c-toxcore"
 
   option "without-av", "Compile without A/V support"
