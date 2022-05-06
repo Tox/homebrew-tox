@@ -1,7 +1,7 @@
 class Qtox < Formula
   desc "The most feature-rich Tox client; P2P instant messaging, audio & video calls"
   homepage "https://qtox.github.io/"
-  head "git://github.com/qTox/qTox"
+  head "https://github.com/qTox/qTox"
 
   option "with-static", "Static build, allows you to run the app without having Qt installed"
 
