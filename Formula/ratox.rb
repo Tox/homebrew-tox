@@ -3,7 +3,7 @@ class Ratox < Formula
   homepage "https://ratox.2f30.org"
   url "https://dl.2f30.org/releases/ratox-0.2.1.tar.gz"
   sha256 "25ea4e7e286d23ca4fe99e0619c384fc6b371178e8877681b382d94dd958a9ba"
-  head "git://git.2f30.org/ratox"
+  head "https://git.2f30.org/ratox"
 
   depends_on "libtoxcore"
 
