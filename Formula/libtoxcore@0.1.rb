@@ -40,7 +40,7 @@ class LibtoxcoreAT01 < Formula
     
     system "mkdir _build"
     chdir "_build" do
-      system "cmake", *args, *std_cmake_args ".."
+      system "cmake", *args, *std_cmake_args, ".."
       system "make"
       system "make", "install"
     end
