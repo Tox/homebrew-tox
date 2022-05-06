@@ -1,7 +1,7 @@
 class Utox < Formula
   desc "µTox the lightest and fluffiest Tox client"
   homepage "https://tox.chat"
-  head "git://github.com/uTox/uTox", :branch => "develop"
+  head "https://github.com/uTox/uTox", :branch => "develop"
 
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
