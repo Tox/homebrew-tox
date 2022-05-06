@@ -36,7 +36,9 @@ class Libtoxcore < Formula
       args << "-DENABLE_SHARED=OFF"
     end
 
-    system "cmake", ".", *args, *std_cmake_args
+    system "mkdir _build"
+    system "cd _build"
+    system "cmake", "..", *args, *std_cmake_args
     system "make"
     system "make", "install"
   end
